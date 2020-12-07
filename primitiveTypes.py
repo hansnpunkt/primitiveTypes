@@ -5,8 +5,8 @@ def count_bits(x):
     # counting all non-zero entries of the bitwise representation
     num_bits = 0
     while x:
-        num_bits+=x&1
-        x>>=1
+        num_bits+=x&1 # returns 1 if both the bits are 1, this tests if first byte is 1 (returns 1 if it is)
+        x>>=1 # shift by 1 bit and do again
     return num_bits
 
 
