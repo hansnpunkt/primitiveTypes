@@ -55,12 +55,26 @@ def mergeSort(arr: np.array):
             j += 1
             k += 1
 
+def arrayMultiplicator(arr1: np.array, arr2: np.array):
+    # xor for sign
+    if arr1[0] < 0 ^ arr2[0] < 0:
+        sign = -1
+    else:
+        sign = 1
+    temp1 = 0
+    temp2 = 0
+    for j in range(0, len(arr2)):
+        for i in range(0, len(arr1)):
+            temp1 += arr2[len(arr2) - 1 -j] * arr1[len(arr1) - 1 -i] * 10**(i+j)
+        temp2+=temp1
+        temp1 = 0
+    return sign*temp2
 
 if __name__ == '__main__':
     t = Timer()
     # test quicksort
     s_size = [100] # sample size
-    arr_size = [10, 50, 100, 400, 800] # array size
+    arr_size = [10] #, 50, 100, 400, 800] # array size
     for crawler in itertools.product(s_size, arr_size):
         t.start()
         for j in range(crawler[0]):
@@ -78,3 +92,6 @@ if __name__ == '__main__':
             mergeSort(A)
         t.stop()
         print("Mergesort |", s_size," Arrays of size", crawler[1], f" Elapsed time: {t._elapsed_time:0.4f} seconds")
+
+
+    print(arrayMultiplicator([2,3,4,5,5,6,7,8,9,9,1,2,3,4,5,6,7,3,0,2,3,4,5,3,4,5,6,7,8,9,6,4,3,4,5,6,7,8], [-2,1,4,5,6,7,8]))
