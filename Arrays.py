@@ -55,6 +55,23 @@ def mergeSort(arr: np.array):
             j += 1
             k += 1
 
+def integerToArray(inte: int):
+    # xor for sign
+    if inte < 0:
+        sign = -1
+    else:
+        sign = 1
+    inte = abs(inte)
+    int_str = str(inte)
+    len_str = len(int_str)
+    arr = np.empty(len_str)
+    for j in range(len_str):
+        arr[j] =  int(int_str[j])
+    arr = arr.astype(int)
+    arr[0] *= sign
+
+    return arr.tolist()
+
 def arrayMultiplicator(arr1: np.array, arr2: np.array):
     # xor for sign
     if arr1[0] < 0 ^ arr2[0] < 0:
@@ -63,6 +80,9 @@ def arrayMultiplicator(arr1: np.array, arr2: np.array):
         sign = 1
     temp1 = 0
     temp2 = 0
+
+    # TODO: built lookup table (for shortest integer)
+
     for j in range(0, len(arr2)):
         for i in range(0, len(arr1)):
             temp1 += arr2[len(arr2) - 1 -j] * arr1[len(arr1) - 1 -i] * 10**(i+j)
@@ -94,4 +114,5 @@ if __name__ == '__main__':
         print("Mergesort |", s_size," Arrays of size", crawler[1], f" Elapsed time: {t._elapsed_time:0.4f} seconds")
 
 
-    print(arrayMultiplicator([2,3,4,5,5,6,7,8,9,9,1,2,3,4,5,6,7,3,0,2,3,4,5,3,4,5,6,7,8,9,6,4,3,4,5,6,7,8], [-2,1,4,5,6,7,8]))
+    print(arrayMultiplicator(integerToArray(-232334343434343434343433), integerToArray(-52343434343343434344343)))
+    # interestingly, buffer overflow when arrays are numpy arrays, not when they are stored as lists
