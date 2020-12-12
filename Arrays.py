@@ -73,6 +73,10 @@ def integerToArray(inte: int):
     return arr.tolist()
 
 def arrayMultiplicator(arr1: np.array, arr2: np.array):
+    """
+
+    :type arr1: numpy array, arr2: numpy array
+    """
     # xor for sign
     if arr1[0] < 0 ^ arr2[0] < 0:
         sign = -1
@@ -81,7 +85,14 @@ def arrayMultiplicator(arr1: np.array, arr2: np.array):
     temp1 = 0
     temp2 = 0
 
-    # TODO: built lookup table (for shortest integer)
+    # since multiplication is commutative, swap arr1 and arr2 so that shorter one is arr2 make positive too
+
+    if len(arr1) < len(arr2):
+        arr1, arr2 = arr2, arr1
+
+    # make positive
+    arr1[0] = abs(arr1[0])
+    arr2[0] = abs(arr2[0])
 
     for j in range(0, len(arr2)):
         for i in range(0, len(arr1)):
@@ -89,6 +100,7 @@ def arrayMultiplicator(arr1: np.array, arr2: np.array):
         temp2+=temp1
         temp1 = 0
     return sign*temp2
+
 
 if __name__ == '__main__':
     t = Timer()
@@ -114,5 +126,5 @@ if __name__ == '__main__':
         print("Mergesort |", s_size," Arrays of size", crawler[1], f" Elapsed time: {t._elapsed_time:0.4f} seconds")
 
 
-    print(arrayMultiplicator(integerToArray(-232334343434343434343433), integerToArray(-52343434343343434344343)))
+    print(arrayMultiplicator(integerToArray(21221), integerToArray(5)))
     # interestingly, buffer overflow when arrays are numpy arrays, not when they are stored as lists
