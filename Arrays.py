@@ -125,6 +125,35 @@ if __name__ == '__main__':
         t.stop()
         print("Mergesort |", s_size," Arrays of size", crawler[1], f" Elapsed time: {t._elapsed_time:0.4f} seconds")
 
+    # comparing inserting with appending
 
-    print(arrayMultiplicator(integerToArray(21221), integerToArray(5)))
+    n = 10000
+    t.start()
+    A = []
+    for j in range(n):
+        A = np.append(A, [j])
+    t.stop()
+    print(f" Append | Elapsed time: {t._elapsed_time:0.4f} seconds")
+
+    append_time = t._elapsed_time
+
+    t.start()
+    A = np.empty((n,1))
+    for j in range(n):
+        A[j] = j
+    t.stop()
+    print(f" Insert | Elapsed time: {t._elapsed_time:0.4f} seconds")
+
+    insert_time = t._elapsed_time
+
+    print(" ")
+
+    print(f" Insert takes only {insert_time/append_time*100:0.2f} % of the time that it takes to append.")
+
+    # result of big multiplication
+    print(" ")
+    arr1 = integerToArray(21221)
+    arr2 = integerToArray(5)
+    print(f"Result of multiplying {arr1} with {arr2}:")
+    print(arrayMultiplicator(arr1, arr2))
     # interestingly, buffer overflow when arrays are numpy arrays, not when they are stored as lists
